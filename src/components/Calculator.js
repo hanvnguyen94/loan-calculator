@@ -96,6 +96,24 @@ const Calculator = () => {
     return true
   }
 
+  // function to reset the calculator
+
+  const resetCalculator = () => {
+    // set state to be empty again
+    setUserInput({
+      amount: '',
+      interest: '',
+      years: '',
+    })
+
+    setResults({
+      monthlyPayment: '',
+      totalPayment: '',
+      totalInterest: '',
+      isResult: false,
+    })
+  }
+
 
   return (
     <FormContainer>
@@ -145,7 +163,13 @@ const Calculator = () => {
 
               <Button type='submit' variant='primary'>
                 CALCULATE
-        </Button>
+              </Button>
+
+              <Form.Control
+                value='RESET'
+                type='button'
+                onClick={resetCalculator}
+              />
 
             </Form>
           </>
@@ -160,8 +184,8 @@ const Calculator = () => {
               <Col>
                 <h4>
                   Loan amount: ${userInput.amount} <br />
-          Interest: {userInput.interest}% <br />
-          Years to repay: {userInput.years} years <br />
+                  Interest: {userInput.interest}% <br />
+                  Years to repay: {userInput.years} years <br />
                 </h4>
               </Col>
             </Row>
@@ -170,11 +194,17 @@ const Calculator = () => {
               <Col>
                 <h4>
                   Monthly Payment: ${results.monthlyPayment} <br />
-            Total Payments: {results.totalPayment} <br />
-            Total Interest: {results.totalInterest}% <br />
+                  Total Payments: {results.totalPayment} <br />
+                  Total Interest: {results.totalInterest}% <br />
                 </h4>
               </Col>
             </Row>
+
+            <Form.Control
+              value='RESET'
+              type='button'
+              onClick={resetCalculator}
+            />
           </>
         )}
     </FormContainer>
