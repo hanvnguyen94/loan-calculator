@@ -116,7 +116,7 @@ const Calculator = () => {
 
 
   return (
-    <FormContainer>
+    <FormContainer className='pt-3'>
       {!results.isResult ?
         (
           <>
@@ -128,7 +128,7 @@ const Calculator = () => {
                 <Form.Label>Amount</Form.Label>
                 <Form.Control
                   required
-                  type='number'
+                  type='text'
                   placeholder='Loan Amount'
                   name='amount'
                   value={userInput.amount}
@@ -137,11 +137,36 @@ const Calculator = () => {
                 </Form.Control>
               </Form.Group>
 
+              <Form.Group controlId='years'>
+                <Form.Label>Loan term in years</Form.Label>
+                <Form.Control
+                  required
+                  type='text'
+                  placeholder='Years'
+                  name='years'
+                  value={userInput.years}
+                  onChange={handleInputChange}
+                ></Form.Control>
+              </Form.Group>
+              <h5>Or</h5>
+
+              <Form.Group controlId='months'>
+                <Form.Label>Loan term in months</Form.Label>
+                <Form.Control
+                  required
+                  type='text'
+                  placeholder='Years'
+                  name='years'
+                  value={userInput.years * 12}
+                  onChange={handleInputChange}
+                ></Form.Control>
+              </Form.Group>
+
               <Form.Group controlId='interest'>
                 <Form.Label>Interest</Form.Label>
                 <Form.Control
                   required
-                  type='number'
+                  type='text'
                   placeholder='Interest Rate'
                   name='interest'
                   value={userInput.interest}
@@ -149,27 +174,18 @@ const Calculator = () => {
                 ></Form.Control>
               </Form.Group>
 
-              <Form.Group controlId='years'>
-                <Form.Label>Years</Form.Label>
-                <Form.Control
-                  required
-                  type='number'
-                  placeholder='Years'
-                  name='years'
-                  value={userInput.years}
-                  onChange={handleInputChange}
-                ></Form.Control>
-              </Form.Group>
 
-              <Button type='submit' variant='primary'>
+              <Button className='mr-3'
+                type='submit'
+                variant='primary'>
                 CALCULATE
               </Button>
 
-              <Form.Control
-                value='RESET'
-                type='button'
-                onClick={resetCalculator}
-              />
+              <Button
+                type='submit'
+                onClick={resetCalculator}>
+                RESET
+              </Button>
 
             </Form>
           </>
