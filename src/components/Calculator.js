@@ -15,13 +15,16 @@ const Calculator = () => {
   })
 
   // create state to store results value
-
   const [results, setResults] = useState({
     monthlyPayment: '',
     totalPayment: '',
     totalInterest: '',
     isResult: false
   })
+
+  // handle errors
+
+  const [error, setError] = useState('')
 
   const calculateLoan = ({ amount, interest, years }) => {
 
@@ -60,98 +63,121 @@ const Calculator = () => {
 
   const submitHandler = (e) => {
     e.preventDefault()
-
     // call the calculate function to calculate 
     // based on user input
-    calculateLoan(userInput)
-
+    if (isValid()) {
+      setError('')
+      calculateLoan(userInput)
+    }
   }
 
+  // function to check if there's any error occurs
+
+  const isValid = () => {
+    const { amount, interest, years } = userInput
+
+    let error
+
+    // valid all input numbers are numbers
+    if (isNaN(amount) || isNaN(interest) || isNaN(years)) {
+      // throw new Error('Must be a valid number')
+      error = 'Must be a valid number'
+    }
+
+    // valid all input numbers are positive numbers
+    if (Number(amount) <= 0 || Number(interest) <= 0 || Number(years) <= 0) {
+      error = 'Numbers must be positive'
+    }
+
+    if (error) {
+      setError(error)
+      return false
+    }
+    return false
+  }
 
 
   return (
     <FormContainer>
-      <h1>Han's Loan Calculator</h1>
-      <Form onSubmit={submitHandler}>
-        <Form.Group controlId='amount'>
-          <Form.Label>Amount</Form.Label>
-          <Form.Control
-            type='text'
-            placeholder='Loan Amount'
-            name='amount'
-            value={userInput.amount}
-            onChange={handleInputChange}
-          >
-          </Form.Control>
-        </Form.Group>
+      {!results.isResult ?
+        (
+          <>
+            <h1>Han's Loan Calculator</h1>
+            {error}
+            <Form onSubmit={submitHandler}>
+              {/* checking if the page has calculated results or not */}
+              <Form.Group controlId='amount'>
+                <Form.Label>Amount</Form.Label>
+                <Form.Control
+                  required
+                  type='text'
+                  placeholder='Loan Amount'
+                  name='amount'
+                  value={userInput.amount}
+                  onChange={handleInputChange}
+                >
+                </Form.Control>
+              </Form.Group>
 
-        <Form.Group controlId='interest'>
-          <Form.Label>Interest</Form.Label>
-          <Form.Control
-            type='text'
-            placeholder='Interest Rate'
-            name='interest'
-            value={userInput.interest}
-            onChange={handleInputChange}
-          ></Form.Control>
-        </Form.Group>
+              <Form.Group controlId='interest'>
+                <Form.Label>Interest</Form.Label>
+                <Form.Control
+                  required
+                  type='text'
+                  placeholder='Interest Rate'
+                  name='interest'
+                  value={userInput.interest}
+                  onChange={handleInputChange}
+                ></Form.Control>
+              </Form.Group>
 
-        <Form.Group controlId='years'>
-          <Form.Label>Years</Form.Label>
-          <Form.Control
-            type='text'
-            placeholder='Years'
-            name='years'
-            value={userInput.years}
-            onChange={handleInputChange}
-          ></Form.Control>
-        </Form.Group>
+              <Form.Group controlId='years'>
+                <Form.Label>Years</Form.Label>
+                <Form.Control
+                  required
+                  type='text'
+                  placeholder='Years'
+                  name='years'
+                  value={userInput.years}
+                  onChange={handleInputChange}
+                ></Form.Control>
+              </Form.Group>
 
-        <Button type='submit' variant='primary'>
-          CALCULATE
+              <Button type='submit' variant='primary'>
+                CALCULATE
         </Button>
 
-      </Form>
-
-      <h1>Results</h1>
-
-      <Form>
-        <h4>
-          Loan amount: ${userInput.amount} <br />
+            </Form>
+          </>
+        ) : (
+          <>
+            <Row className='py-3'>
+              <Col>
+                <h1>Results</h1>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <h4>
+                  Loan amount: ${userInput.amount} <br />
           Interest: {userInput.interest}% <br />
           Years to repay: {userInput.years} years <br />
-        </h4>
-        <Form.Group>
-          <Form.Label>Monthly Payment:</Form.Label>
-          <Form.Control
-            type='text'
-            value={results.monthlyPayment}
-            disabled
-          >
-          </Form.Control>
-        </Form.Group>
+                </h4>
+              </Col>
+            </Row>
 
-        <Form.Group>
-          <Form.Label>Total Payments:</Form.Label>
-          <Form.Control
-            type='text'
-            value={results.totalPayment}
-            disabled
-          ></Form.Control>
-        </Form.Group>
-
-        <Form.Group>
-          <Form.Label>Total Interest:</Form.Label>
-          <Form.Control
-            type='text'
-            value={results.totalInterest}
-            disabled
-          ></Form.Control>
-        </Form.Group>
-      </Form>
-
+            <Row>
+              <Col>
+                <h4>
+                  Monthly Payment: ${results.monthlyPayment} <br />
+            Total Payments: {results.totalPayment} <br />
+            Total Interest: {results.totalInterest}% <br />
+                </h4>
+              </Col>
+            </Row>
+          </>
+        )}
     </FormContainer>
-
 
   )
 }
