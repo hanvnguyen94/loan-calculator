@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 
 import { signIn } from '../../api/auth'
+import messages from '../AutoDismissAlert/messages'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+
 
 class SignIn extends Component {
   constructor(props) {
@@ -23,13 +25,23 @@ class SignIn extends Component {
   onSignIn = event => {
     event.preventDefault()
 
-    const { history, setUser } = this.props
+    const { msgAlert, history, setUser } = this.props
 
     signIn(this.state)
       .then(res => setUser(res.data.user))
+      .then(() => msgAlert({
+        heading: 'Log In Success',
+        message: messages.signInSuccess,
+        variant: 'success'
+      }))
       .then(() => history.push('/'))
       .catch(error => {
         this.setState({ email: '', password: '' })
+        msgAlert({
+          heading: 'Log In Failed with error: ' + error.message,
+          message: messages.signInFailure,
+          variant: 'danger'
+        })
       })
   }
 
@@ -64,11 +76,7 @@ class SignIn extends Component {
               />
             </Form.Group>
             <Button
-              variant="outline-info"
-              type="submit"
-            >
-              Submit
-            </Button>
+              type="submit">Submit</Button>
           </Form>
         </div>
       </div>

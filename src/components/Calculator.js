@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import FormContainer from './FormContainer'
 import { Form, Button, Row, Col } from 'react-bootstrap'
+import { withRouter } from 'react-router-dom'
 
 
 const Calculator = () => {
@@ -228,4 +229,4 @@ const Calculator = () => {
   )
 }
 
-export default Calculator
+export default withRouter(Calculator)

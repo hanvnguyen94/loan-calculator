@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 
 import { signUp, signIn } from '../../api/auth'
+import messages from '../AutoDismissAlert/messages'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -24,14 +25,24 @@ class SignUp extends Component {
   onSignUp = event => {
     event.preventDefault()
 
-    const { history, setUser } = this.props
+    const { msgAlert, history, setUser } = this.props
 
     signUp(this.state)
       .then(() => signIn(this.state))
       .then(res => setUser(res.data.user))
+      .then(() => msgAlert({
+        heading: 'Register Success',
+        message: messages.signUpSuccess,
+        variant: 'success'
+      }))
       .then(() => history.push('/'))
       .catch(error => {
         this.setState({ email: '', password: '', passwordConfirmation: '' })
+        msgAlert({
+          heading: 'Register Failed with error: ' + error.message,
+          message: messages.signUpFailure,
+          variant: 'danger'
+        })
       })
   }
 
@@ -50,7 +61,7 @@ class SignUp extends Component {
                 type="email"
                 name="email"
                 value={email}
-                placeholder="Enter email (required .com)"
+                placeholder="Enter email"
                 onChange={this.handleChange}
               />
             </Form.Group>
@@ -61,7 +72,7 @@ class SignUp extends Component {
                 name="password"
                 value={password}
                 type="password"
-                placeholder="Password must have at least 5 characters"
+                placeholder=" Enter password"
                 onChange={this.handleChange}
               />
             </Form.Group>
@@ -76,12 +87,7 @@ class SignUp extends Component {
                 onChange={this.handleChange}
               />
             </Form.Group>
-            <Button
-              variant="outline-info"
-              type="submit"
-            >
-              Submit
-            </Button>
+            <Button type="submit">Submit</Button>
           </Form>
         </div>
       </div>
