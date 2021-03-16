@@ -44,7 +44,7 @@ const Calculator = () => {
     if (isFinite(monthlyPayment)) {
       const monthlyPaymentCalculated = monthlyPayment.toFixed(2)
       const totalPaymentCalculated = (monthlyPayment * calculatedPayments).toFixed(2)
-      const totalInterestCalculated = (monthlyPayment * calculatedPayments - userInput).toFixed(2)
+      const totalInterestCalculated = (monthlyPayment * calculatedPayments - inputAmount).toFixed(2)
 
       // set results to state so we can display
 
@@ -76,7 +76,7 @@ const Calculator = () => {
   const isValid = () => {
     const { amount, interest, years } = userInput
 
-    let error
+    let error = ''
 
     // valid all input numbers are numbers
     if (isNaN(amount) || isNaN(interest) || isNaN(years)) {
@@ -93,7 +93,7 @@ const Calculator = () => {
       setError(error)
       return false
     }
-    return false
+    return true
   }
 
 
@@ -110,7 +110,7 @@ const Calculator = () => {
                 <Form.Label>Amount</Form.Label>
                 <Form.Control
                   required
-                  type='text'
+                  type='number'
                   placeholder='Loan Amount'
                   name='amount'
                   value={userInput.amount}
@@ -123,7 +123,7 @@ const Calculator = () => {
                 <Form.Label>Interest</Form.Label>
                 <Form.Control
                   required
-                  type='text'
+                  type='number'
                   placeholder='Interest Rate'
                   name='interest'
                   value={userInput.interest}
@@ -135,7 +135,7 @@ const Calculator = () => {
                 <Form.Label>Years</Form.Label>
                 <Form.Control
                   required
-                  type='text'
+                  type='number'
                   placeholder='Years'
                   name='years'
                   value={userInput.years}
