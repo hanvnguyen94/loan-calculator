@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Form, Button, Row, Col, Card, ListGroup } from 'react-bootstrap'
+import { Form, Button, Row, Col, Card, ListGroup, Dropdown, DropdownButton } from 'react-bootstrap'
 import { withRouter } from 'react-router-dom'
 
 
@@ -10,9 +10,13 @@ const Calculator = () => {
   const [userInput, setUserInput] = useState({
     amount: '',
     interest: '',
-    years: '',
-    month: ''
+    years: ''
   })
+
+  // const [amount, setAmount] = useState(0)
+  // const [interest, setInterest] = useState(0)
+  // const [terms, setTerms] = useState(0)
+  // const [monthsOrYears, setMonthsOrYears] = useState(0)
 
   // create state to store results value
   const [results, setResults] = useState({
@@ -26,7 +30,7 @@ const Calculator = () => {
 
   const [error, setError] = useState('')
 
-  const calculateLoan = ({ amount, interest, years, months }) => {
+  const calculateLoan = ({ amount, interest, years }) => {
 
     const inputAmount = Number(amount)
 
@@ -103,8 +107,7 @@ const Calculator = () => {
     setUserInput({
       amount: '',
       interest: '',
-      years: '',
-      month: ''
+      years: ''
     })
 
 
@@ -116,11 +119,13 @@ const Calculator = () => {
     })
   }
 
+  const handleSelect = (e) => {
+    console.log(e)
+  }
 
   return (
     <>
       <h1>Han's Loan Calculator</h1>
-
       <Row>
         <Col md={6}>
           {error}
@@ -152,7 +157,19 @@ const Calculator = () => {
             </Form.Group>
             <h5>Or</h5>
 
-            <Form.Group controlId='months'>
+            {/* testing dropdown options */}
+
+            <DropdownButton
+              alignRight
+              title="Choose Loan Term Options"
+              id="dropdown-menu-align-right"
+              onSelect={handleSelect}
+            >
+              <Dropdown.Item eventKey="option-1">In Years</Dropdown.Item>
+              <Dropdown.Item eventKey="option-2">In Months</Dropdown.Item>
+            </DropdownButton>
+
+            <Form.Group controlId='months' key='1'>
               <Form.Label>Loan term in months</Form.Label>
               <Form.Control
                 required
@@ -212,32 +229,6 @@ const Calculator = () => {
             </Button>
           </Card.Body>
         </Card>
-
-        {/* <Col md={6}>
-          <Row className='py-3'>
-            <Col>
-              <h1>Results</h1>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <h4>
-                Loan amount: ${userInput.amount} <br />
-                Interest: {userInput.interest}%
-              </h4>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col>
-              <h4>
-                Monthly Payment: ${results.monthlyPayment} <br />
-                Total Interest: {results.totalInterest} <br />
-              </h4>
-            </Col>
-          </Row>
-
-        </Col> */}
       </Row>
     </>
   )
