@@ -133,58 +133,82 @@ const Calculator = () => {
           {error}
           <Form onSubmit={submitHandler}>
             {/* checking if the page has calculated results or not */}
-            <Form.Group controlId='amount'>
-              <Form.Label>Amount</Form.Label>
-              <Form.Control
-                required
-                type='text'
-                placeholder='Loan Amount'
-                name='amount'
-                value={userInput.amount}
-                onChange={handleInputChange}
-              >
-              </Form.Control>
-            </Form.Group>
+            <div class="form-group">
+              <label class="control-label">Loan Amount</label>
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                  </div>
+                  <input
+                    required
+                    type="text"
+                    name='amount'
+                    value={userInput.amount}
+                    onChange={handleInputChange}
+                    className="form-control"
+                    aria-label="Amount (to the nearest dollar)">
+                  </input>
+                  <div class="input-group-append">
+                    <span class="input-group-text">.00</span>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-            <Form.Group controlId='years'>
-              <Form.Label>Loan term in years</Form.Label>
-              <Form.Control
-                required
-                type='text'
-                placeholder='Years'
-                name='years'
-                value={userInput.years}
-                onChange={handleInputChange}
-              ></Form.Control>
-            </Form.Group>
-            {/* <h5>Or</h5> */}
+            <div class="form-group">
+              <label class="control-label">Loan term in years</label>
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <input
+                    required
+                    type="text"
+                    name='years'
+                    value={userInput.years}
+                    onChange={handleInputChange}
+                    className="form-control"
+                  >
+                  </input>
+                </div>
+              </div>
+            </div>
 
-            {/* testing dropdown options */}
+            <h6>Or</h6>
 
+            <div class="form-group">
+              <fieldset>
+                <label class="control-label" for="readOnlyInput">Loan term in months</label>
+                <input
+                  class="form-control"
+                  id="readOnlyInput"
+                  type="text"
+                  placeholder='months'
+                  name='months'
+                  value={userInput.years * 12}
+                  readonly="">
+                </input>
+              </fieldset>
+            </div>
 
-            {/* <Form.Group controlId='months' key='1'>
-              <Form.Label>Loan term in months</Form.Label>
-              <Form.Control
-                required
-                type='text'
-                placeholder='Months'
-                name='months'
-                value={years ? years * 12 : months}
-                onChange={(e) => setMonths(e.target.value)}
-              ></Form.Control>
-            </Form.Group> */}
-
-            <Form.Group controlId='interest'>
-              <Form.Label>Interest</Form.Label>
-              <Form.Control
-                required
-                type='text'
-                placeholder='Interest Rate'
-                name='interest'
-                value={userInput.interest}
-                onChange={handleInputChange}
-              ></Form.Control>
-            </Form.Group>
+            <div class="form-group">
+              <label class="control-label">Interest rate per year</label>
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <input
+                    required
+                    type="text"
+                    name='interest'
+                    value={userInput.interest}
+                    onChange={handleInputChange}
+                    className="form-control"
+                  >
+                  </input>
+                  <div class="input-group-append">
+                    <span class="input-group-text">%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
 
 
             <Button className='mr-3'
@@ -204,7 +228,7 @@ const Calculator = () => {
         {/* displaying results card */}
         <Card style={{ width: '18rem' }}>
           <Card.Body>
-            <Card.Title>Monthly Payment</Card.Title>
+            <Card.Title>Monthly Payments</Card.Title>
             <Card.Text>
               ${results.monthlyPayment}
             </Card.Text>
