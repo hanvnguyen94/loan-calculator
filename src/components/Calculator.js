@@ -20,9 +20,9 @@ const Calculator = () => {
 
   // create state to store results value
   const [results, setResults] = useState({
-    monthlyPayment: '',
-    totalPayment: '',
-    totalInterest: '',
+    monthlyPayment: 0,
+    totalPayment: 0,
+    totalInterest: 0,
     isResult: false
   })
 
@@ -110,6 +110,7 @@ const Calculator = () => {
       years: ''
     })
 
+    setError('')
     // setAmount('')
     // setInterest('')
     // setYears('')
@@ -130,9 +131,18 @@ const Calculator = () => {
       <h1>Han's Loan Calculator</h1>
       <Row>
         <Col md={6}>
-          {error}
+          {error ? (
+            <div class="form-group has-danger">
+              <input type="text"
+                value={error}
+                class="form-control is-invalid"
+                id="inputInvalid">
+              </input>
+            </div>
+          ) : ''}
           <Form onSubmit={submitHandler}>
             {/* checking if the page has calculated results or not */}
+
             <div class="form-group">
               <label class="control-label">Loan Amount</label>
               <div class="form-group">
@@ -142,7 +152,7 @@ const Calculator = () => {
                   </div>
                   <input
                     required
-                    type="text"
+                    type="number"
                     name='amount'
                     value={userInput.amount}
                     onChange={handleInputChange}
@@ -154,6 +164,8 @@ const Calculator = () => {
                   </div>
                 </div>
               </div>
+
+
             </div>
 
             <div class="form-group">
@@ -162,7 +174,7 @@ const Calculator = () => {
                 <div class="input-group mb-3">
                   <input
                     required
-                    type="text"
+                    type="number"
                     name='years'
                     value={userInput.years}
                     onChange={handleInputChange}
@@ -181,7 +193,7 @@ const Calculator = () => {
                 <input
                   class="form-control"
                   id="readOnlyInput"
-                  type="text"
+                  type="number"
                   placeholder='months'
                   name='months'
                   value={userInput.years * 12}
@@ -196,7 +208,7 @@ const Calculator = () => {
                 <div class="input-group mb-3">
                   <input
                     required
-                    type="text"
+                    type="number"
                     name='interest'
                     value={userInput.interest}
                     onChange={handleInputChange}
@@ -211,7 +223,8 @@ const Calculator = () => {
             </div>
 
 
-            <Button className='mr-3'
+            <Button
+              className='mr-3'
               type='submit'
               variant='primary'>
               CALCULATE
