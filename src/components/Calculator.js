@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Form, Button, Row, Col, Card, ListGroup, Dropdown, DropdownButton } from 'react-bootstrap'
+import { Form, Button, Row, Col, Card, ListGroup } from 'react-bootstrap'
 import { withRouter } from 'react-router-dom'
 
 
@@ -7,16 +7,17 @@ const Calculator = () => {
   // using hooks to manage state
 
   // initiate state with empty properties
-  const [userInput, setUserInput] = useState({
-    amount: '',
-    interest: '',
-    years: ''
-  })
+  // const [userInput, setUserInput] = useState({
+  //   amount: '',
+  //   interest: '',
+  //   years: '',
+  //   months: ''
+  // })
 
-  // const [amount, setAmount] = useState(0)
-  // const [interest, setInterest] = useState(0)
-  // const [terms, setTerms] = useState(0)
-  // const [monthsOrYears, setMonthsOrYears] = useState(0)
+  const [amount, setAmount] = useState('')
+  const [interest, setInterest] = useState('')
+  const [years, setYears] = useState('')
+  // const [months, setMonths] = useState('')
 
   // create state to store results value
   const [results, setResults] = useState({
@@ -62,8 +63,8 @@ const Calculator = () => {
     return
   }
 
-  const handleInputChange = (e) =>
-    setUserInput({ ...userInput, [e.target.name]: e.target.value })
+  // const handleInputChange = (e) =>
+  //   setUserInput({ ...userInput, [e.target.name]: e.target.value })
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -71,14 +72,14 @@ const Calculator = () => {
     // based on user input
     if (isValid()) {
       setError('')
-      calculateLoan(userInput)
+      calculateLoan(amount, interest, years)
     }
   }
 
   // function to check if there's any error occurs
 
   const isValid = () => {
-    const { amount, interest, years } = userInput
+    // const { amount, interest, years, months } = userInput
 
     let error = ''
 
@@ -104,11 +105,17 @@ const Calculator = () => {
 
   const resetCalculator = () => {
     // set state to be empty again
-    setUserInput({
-      amount: '',
-      interest: '',
-      years: ''
-    })
+    // setUserInput({
+    //   amount: '',
+    //   interest: '',
+    //   years: '',
+    //   months: ''
+    // })
+
+    setAmount('')
+    setInterest('')
+    setYears('')
+    // setMonths('')
 
 
     setResults({
@@ -119,9 +126,6 @@ const Calculator = () => {
     })
   }
 
-  const handleSelect = (e) => {
-    console.log(e)
-  }
 
   return (
     <>
@@ -138,8 +142,8 @@ const Calculator = () => {
                 type='text'
                 placeholder='Loan Amount'
                 name='amount'
-                value={userInput.amount}
-                onChange={handleInputChange}
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
               >
               </Form.Control>
             </Form.Group>
@@ -151,23 +155,14 @@ const Calculator = () => {
                 type='text'
                 placeholder='Years'
                 name='years'
-                value={userInput.years}
-                onChange={handleInputChange}
+                value={years}
+                onChange={(e) => setYears(e.target.value)}
               ></Form.Control>
             </Form.Group>
-            <h5>Or</h5>
+            {/* <h5>Or</h5> */}
 
             {/* testing dropdown options */}
 
-            <DropdownButton
-              alignRight
-              title="Choose Loan Term Options"
-              id="dropdown-menu-align-right"
-              onSelect={handleSelect}
-            >
-              <Dropdown.Item eventKey="option-1">In Years</Dropdown.Item>
-              <Dropdown.Item eventKey="option-2">In Months</Dropdown.Item>
-            </DropdownButton>
 
             <Form.Group controlId='months' key='1'>
               <Form.Label>Loan term in months</Form.Label>
@@ -176,8 +171,8 @@ const Calculator = () => {
                 type='text'
                 placeholder='Months'
                 name='months'
-                value={userInput.years * 12}
-                onChange={handleInputChange}
+                value={years ? years * 12 : years}
+                onChange={(e) => setYears(e.target.value)}
               ></Form.Control>
             </Form.Group>
 
@@ -188,8 +183,8 @@ const Calculator = () => {
                 type='text'
                 placeholder='Interest Rate'
                 name='interest'
-                value={userInput.interest}
-                onChange={handleInputChange}
+                value={interest}
+                onChange={(e) => setInterest(e.target.value)}
               ></Form.Control>
             </Form.Group>
 
@@ -217,7 +212,7 @@ const Calculator = () => {
             </Card.Text>
           </Card.Body>
           <ListGroup className="list-group-flush">
-            <ListGroup.Item>Total Principal Paid ${userInput.amount}</ListGroup.Item>
+            <ListGroup.Item>Total Principal Paid ${amount}</ListGroup.Item>
             <ListGroup.Item>Total Interest Paid ${results.totalInterest}</ListGroup.Item>
           </ListGroup>
           <Card.Body>
