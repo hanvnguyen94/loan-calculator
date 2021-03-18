@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Form, Button, Row, Col } from 'react-bootstrap'
+import { Form, Button, Row, Col, Card, ListGroup } from 'react-bootstrap'
 import { withRouter } from 'react-router-dom'
 
 
@@ -120,9 +120,9 @@ const Calculator = () => {
   return (
     <>
       <h1>Han's Loan Calculator</h1>
+
       <Row>
         <Col md={6}>
-
           {error}
           <Form onSubmit={submitHandler}>
             {/* checking if the page has calculated results or not */}
@@ -188,10 +188,32 @@ const Calculator = () => {
               onClick={resetCalculator}>
               RESET
               </Button>
-
           </Form>
         </Col>
-        <Col md={6}>
+
+        {/* displaying results card */}
+        <Card style={{ width: '18rem' }}>
+          <Card.Body>
+            <Card.Title>Monthly Payment</Card.Title>
+            <Card.Text>
+              ${results.monthlyPayment}
+            </Card.Text>
+          </Card.Body>
+          <ListGroup className="list-group-flush">
+            <ListGroup.Item>Total Principal Paid ${userInput.amount}</ListGroup.Item>
+            <ListGroup.Item>Total Interest Paid ${results.totalInterest}</ListGroup.Item>
+          </ListGroup>
+          <Card.Body>
+            <Button
+              className='btn-block'
+              target='blank'
+              href="https://www.bankrate.com/loans/personal-loans/rates/">
+              COMPARE LOAN RATES
+            </Button>
+          </Card.Body>
+        </Card>
+
+        {/* <Col md={6}>
           <Row className='py-3'>
             <Col>
               <h1>Results</h1>
@@ -210,12 +232,12 @@ const Calculator = () => {
             <Col>
               <h4>
                 Monthly Payment: ${results.monthlyPayment} <br />
-                Total Interest: {results.totalInterest}% <br />
+                Total Interest: {results.totalInterest} <br />
               </h4>
             </Col>
           </Row>
 
-        </Col>
+        </Col> */}
       </Row>
     </>
   )
