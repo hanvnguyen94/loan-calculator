@@ -1,22 +1,16 @@
 import React, { useState } from 'react'
-import { Form, Button, Row, Col, Card, ListGroup } from 'react-bootstrap'
+import { Container, Form, Button, Row, Col, Card, ListGroup } from 'react-bootstrap'
 import { withRouter } from 'react-router-dom'
 
 
 const Calculator = () => {
   // using hooks to manage state
-
   // initiate state with empty properties
   const [userInput, setUserInput] = useState({
     amount: '',
     interest: '',
     years: '',
   })
-
-  // const [amount, setAmount] = useState('')
-  // const [interest, setInterest] = useState('')
-  // const [years, setYears] = useState('')
-  // const [months, setMonths] = useState('')
 
   // create state to store results value
   const [results, setResults] = useState({
@@ -76,20 +70,19 @@ const Calculator = () => {
   }
 
   // function to check if there's any error occurs
-
   const isValid = () => {
-    // const { amount, interest, years, months } = userInput
+    const { amount, interest, years } = userInput
 
     let error = ''
 
     // valid all input numbers are numbers
-    if (isNaN(userInput.amount) || isNaN(userInput.interest) || isNaN(userInput.years)) {
+    if (isNaN(amount) || isNaN(interest) || isNaN(years)) {
       // throw new Error('Must be a valid number')
       error = 'Must be a valid number'
     }
 
     // valid all input numbers are positive numbers
-    if (Number(userInput.amount) <= 0 || Number(userInput.interest) <= 0 || Number(userInput.years) <= 0) {
+    if (Number(amount) <= 0 || Number(interest) <= 0 || Number(years) <= 0) {
       error = 'Numbers must be positive'
     }
 
@@ -111,11 +104,6 @@ const Calculator = () => {
     })
 
     setError('')
-    // setAmount('')
-    // setInterest('')
-    // setYears('')
-    // setMonths('')
-
 
     setResults({
       monthlyPayment: '',
@@ -127,28 +115,26 @@ const Calculator = () => {
 
 
   return (
-    <>
+    <Container >
       <h1>Han's Loan Calculator</h1>
-      <Row>
+      <Row className='py-3 my-3 box-around'>
         <Col md={6}>
           {error ? (
-            <div class="form-group has-danger">
+            <div className="form-group has-danger">
               <input type="text"
                 value={error}
-                class="form-control is-invalid"
+                className="form-control is-invalid"
                 id="inputInvalid">
               </input>
             </div>
           ) : ''}
           <Form onSubmit={submitHandler}>
-            {/* checking if the page has calculated results or not */}
-
-            <div class="form-group">
-              <label class="control-label">Loan Amount</label>
-              <div class="form-group">
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">$</span>
+            <div className="form-group">
+              <label className="control-label">Loan Amount</label>
+              <div className="form-group">
+                <div className="input-group mb-3">
+                  <div className="input-group-prepend">
+                    <span className="input-group-text">$</span>
                   </div>
                   <input
                     required
@@ -159,19 +145,26 @@ const Calculator = () => {
                     className="form-control"
                     aria-label="Amount (to the nearest dollar)">
                   </input>
-                  <div class="input-group-append">
-                    <span class="input-group-text">.00</span>
+                  <div className="input-group-append">
+                    <span className="input-group-text">.00</span>
                   </div>
                 </div>
               </div>
-
-
             </div>
 
-            <div class="form-group">
-              <label class="control-label">Loan term in years</label>
-              <div class="form-group">
-                <div class="input-group mb-3">
+            <div className="form-group">
+              <label className="control-label">Loan term in years</label>
+              <fieldset className="form-group">
+                <input
+                  value={userInput.years}
+                  onChange={(e) => setUserInput({ years: e.target.value })}
+                  min="1" max="99" step="0.5"
+                  type="range"
+                  className="custom-range"
+                  id="customRange1"></input>
+              </fieldset>
+              <div className="form-group">
+                <div className="input-group mb-3">
                   <input
                     required
                     type="number"
@@ -187,25 +180,34 @@ const Calculator = () => {
 
             <h6>Or</h6>
 
-            <div class="form-group">
+            <div className="form-group">
               <fieldset>
-                <label class="control-label" for="readOnlyInput">Loan term in months</label>
+                <label className="control-label" htmlFor="readOnlyInput">Loan term in months</label>
                 <input
-                  class="form-control"
+                  className="form-control"
                   id="readOnlyInput"
                   type="number"
-                  placeholder='months'
                   name='months'
                   value={userInput.years * 12}
-                  readonly="">
+                  onChange={handleInputChange}
+                  readOnly='readOnly'
+                >
                 </input>
               </fieldset>
             </div>
 
-            <div class="form-group">
-              <label class="control-label">Interest rate per year</label>
-              <div class="form-group">
-                <div class="input-group mb-3">
+            <div className="form-group w-75">
+              <label className="control-label">Interest rate per year</label>
+              <fieldset className="form-group w-75">
+                <input
+                  onChange={(e) => setUserInput({ interest: e.target.value })}
+                  min="1" max="99" step="0.5"
+                  type="range"
+                  className="custom-range"
+                  id="customRange1"></input>
+              </fieldset>
+              <div className="form-group w-75">
+                <div className="input-group mb-3">
                   <input
                     required
                     type="number"
@@ -215,52 +217,46 @@ const Calculator = () => {
                     className="form-control"
                   >
                   </input>
-                  <div class="input-group-append">
-                    <span class="input-group-text">%</span>
+                  <div className="input-group-append">
+                    <span className="input-group-text">%</span>
                   </div>
                 </div>
               </div>
             </div>
 
-
-            <Button
-              className='mr-3'
-              type='submit'
-              variant='primary'>
-              CALCULATE
+            <div className='w-75'>
+              <Button md={6}
+                className='mr-2'
+                type='submit'
+                variant='primary'>
+                CALCULATE
               </Button>
 
-            <Button
-              type='submit'
-              onClick={resetCalculator}>
-              RESET
+              <Button
+                type='submit'
+                onClick={resetCalculator}>
+                RESET
               </Button>
+            </div>
+
           </Form>
         </Col>
 
-        {/* displaying results card */}
-        <Card style={{ width: '18rem' }}>
+        <Col md={6} className='results'>
+          {/* displaying results card */}
           <Card.Body>
-            <Card.Title>Monthly Payments</Card.Title>
-            <Card.Text>
-              ${results.monthlyPayment}
-            </Card.Text>
+            <Card.Title className='px-4'>Monthly Payments</Card.Title>
+            <Card.Title className='px-4'>
+              $ <span style={{ fontSize: '3rem' }}>{results.monthlyPayment}</span>
+            </Card.Title>
           </Card.Body>
           <ListGroup className="list-group-flush">
-            <ListGroup.Item>Total Principal Paid ${userInput.amount}</ListGroup.Item>
-            <ListGroup.Item>Total Interest Paid ${results.totalInterest}</ListGroup.Item>
+            <ListGroup.Item>Total Principal Paid <span style={{ fontWeight: 'bold' }}>${userInput.amount}</span></ListGroup.Item>
+            <ListGroup.Item>Total Interest Paid <span style={{ fontWeight: 'bold' }}>${results.totalInterest}</span></ListGroup.Item>
           </ListGroup>
-          <Card.Body>
-            <Button
-              className='btn-block'
-              target='blank'
-              href="https://www.bankrate.com/loans/personal-loans/rates/">
-              COMPARE LOAN RATES
-            </Button>
-          </Card.Body>
-        </Card>
+        </Col>
       </Row>
-    </>
+    </Container>
   )
 }
 
