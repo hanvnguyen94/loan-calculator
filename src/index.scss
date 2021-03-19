@@ -22,8 +22,24 @@ h2{
   box-shadow: 2px 2px 2px 1px rgba(192, 254, 209, 0.2);
 }
 
-.result {
+
+// .flex-container1{
+//   display: flex;
+//   // flex-direction: column;
+//   justify-content: center;
+//   // align-items: center;
+// }
+
+.results {
+  color: #2d5939;
+  border-left: 1px solid rgb(192, 254, 209);
+}
+
+.flex-container2 {
+  color: #2d5939;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  padding: 2rem 0;
+  margin: 2rem 0;
 }

@@ -115,145 +115,147 @@ const Calculator = () => {
 
 
   return (
-    <Container >
+    <Container>
       <h1>Han's Loan Calculator</h1>
       <Row className='py-3 my-3 box-around'>
         <Col md={6}>
-          {error ? (
-            <div className="form-group has-danger">
-              <input type="text"
-                value={error}
-                className="form-control is-invalid"
-                id="inputInvalid">
-              </input>
-            </div>
-          ) : ''}
-          <Form onSubmit={submitHandler}>
-            <div className="form-group">
-              <label className="control-label">Loan Amount</label>
-              <div className="form-group">
-                <div className="input-group mb-3">
-                  <div className="input-group-prepend">
-                    <span className="input-group-text">$</span>
-                  </div>
-                  <input
-                    required
-                    type="number"
-                    name='amount'
-                    value={userInput.amount}
-                    onChange={handleInputChange}
-                    className="form-control"
-                    aria-label="Amount (to the nearest dollar)">
-                  </input>
-                  <div className="input-group-append">
-                    <span className="input-group-text">.00</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="form-group">
-              <label className="control-label">Loan term in years</label>
-              <fieldset className="form-group">
-                <input
-                  value={userInput.years}
-                  onChange={(e) => setUserInput({ years: e.target.value })}
-                  min="1" max="99" step="0.5"
-                  type="range"
-                  className="custom-range"
-                  id="customRange1"></input>
-              </fieldset>
-              <div className="form-group">
-                <div className="input-group mb-3">
-                  <input
-                    required
-                    type="number"
-                    name='years'
-                    value={userInput.years}
-                    onChange={handleInputChange}
-                    className="form-control"
-                  >
-                  </input>
-                </div>
-              </div>
-            </div>
-
-            <h6>Or</h6>
-
-            <div className="form-group">
-              <fieldset>
-                <label className="control-label" htmlFor="readOnlyInput">Loan term in months</label>
-                <input
-                  className="form-control"
-                  id="readOnlyInput"
-                  type="number"
-                  name='months'
-                  value={userInput.years * 12}
-                  onChange={handleInputChange}
-                  readOnly='readOnly'
-                >
+          <div className='flex-container1'>
+            {error ? (
+              <div className="form-group has-danger">
+                <input type="text"
+                  value={error}
+                  className="form-control is-invalid"
+                  id="inputInvalid">
                 </input>
-              </fieldset>
-            </div>
-
-            <div className="form-group w-75">
-              <label className="control-label">Interest rate per year</label>
-              <fieldset className="form-group w-75">
-                <input
-                  onChange={(e) => setUserInput({ interest: e.target.value })}
-                  min="1" max="99" step="0.5"
-                  type="range"
-                  className="custom-range"
-                  id="customRange1"></input>
-              </fieldset>
-              <div className="form-group w-75">
-                <div className="input-group mb-3">
-                  <input
-                    required
-                    type="number"
-                    name='interest'
-                    value={userInput.interest}
-                    onChange={handleInputChange}
-                    className="form-control"
-                  >
-                  </input>
-                  <div className="input-group-append">
-                    <span className="input-group-text">%</span>
+              </div>
+            ) : ''}
+            <Form onSubmit={submitHandler}>
+              <div className="form-group">
+                <label className="control-label">Loan Amount</label>
+                <div className="form-group">
+                  <div className="input-group mb-3">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text">$</span>
+                    </div>
+                    <input
+                      required
+                      type="number"
+                      name='amount'
+                      value={userInput.amount}
+                      onChange={handleInputChange}
+                      className="form-control"
+                      aria-label="Amount (to the nearest dollar)">
+                    </input>
+                    <div className="input-group-append">
+                      <span className="input-group-text">.00</span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div className='w-75'>
-              <Button md={6}
-                className='mr-2'
-                type='submit'
-                variant='primary'>
-                CALCULATE
+              <div className="form-group">
+                <label className="control-label">Loan term in years</label>
+                <fieldset className="form-group">
+                  <input
+                    value={userInput.years}
+                    onChange={(e) => setUserInput({ years: e.target.value })}
+                    min="1" max="99" step="0.5"
+                    type="range"
+                    className="custom-range"
+                    id="customRange1"></input>
+                </fieldset>
+                <div className="form-group">
+                  <div className="input-group mb-3">
+                    <input
+                      required
+                      type="number"
+                      name='years'
+                      value={userInput.years}
+                      onChange={handleInputChange}
+                      className="form-control"
+                    >
+                    </input>
+                  </div>
+                </div>
+              </div>
+
+              <h6>Or</h6>
+
+              <div className="form-group">
+                <fieldset>
+                  <label className="control-label" htmlFor="readOnlyInput">Loan term in months</label>
+                  <input
+                    className="form-control"
+                    id="readOnlyInput"
+                    type="number"
+                    name='months'
+                    value={userInput.years * 12}
+                    onChange={handleInputChange}
+                    readOnly='readOnly'
+                  >
+                  </input>
+                </fieldset>
+              </div>
+
+              <div className="form-group w-75">
+                <label className="control-label">Interest rate per year</label>
+                <fieldset className="form-group w-75">
+                  <input
+                    onChange={(e) => setUserInput({ interest: e.target.value })}
+                    min="1" max="99" step="0.5"
+                    type="range"
+                    className="custom-range"
+                    id="customRange1"></input>
+                </fieldset>
+                <div className="form-group w-75">
+                  <div className="input-group mb-3">
+                    <input
+                      required
+                      type="number"
+                      name='interest'
+                      value={userInput.interest}
+                      onChange={handleInputChange}
+                      className="form-control"
+                    >
+                    </input>
+                    <div className="input-group-append">
+                      <span className="input-group-text">%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className='w-75'>
+                <Button md={6}
+                  className='mr-2'
+                  type='submit'
+                  variant='primary'>
+                  CALCULATE
               </Button>
 
-              <Button
-                type='submit'
-                onClick={resetCalculator}>
-                RESET
+                <Button
+                  type='submit'
+                  onClick={resetCalculator}>
+                  RESET
               </Button>
-            </div>
+              </div>
 
-          </Form>
+            </Form>
+          </div>
         </Col>
 
         <Col md={6} className='results'>
           {/* displaying results card */}
-          <Card.Body>
+          <div className='flex-container2'>
             <Card.Title className='px-4'>Monthly Payments</Card.Title>
-            <Card.Title className='px-4'>
+            <Card.Title style={{ color: '#2d5939' }} className='px-4'>
               $ <span style={{ fontSize: '3rem' }}>{results.monthlyPayment}</span>
             </Card.Title>
-          </Card.Body>
-          <ListGroup className="list-group-flush">
-            <ListGroup.Item>Total Principal Paid <span style={{ fontWeight: 'bold' }}>${userInput.amount}</span></ListGroup.Item>
-            <ListGroup.Item>Total Interest Paid <span style={{ fontWeight: 'bold' }}>${results.totalInterest}</span></ListGroup.Item>
-          </ListGroup>
+            <ListGroup className="list-group-flush">
+              <ListGroup.Item>Total Principal Paid <span style={{ fontWeight: 'bold' }}>${userInput.amount}</span></ListGroup.Item>
+              <ListGroup.Item>Total Interest Paid <span style={{ fontWeight: 'bold' }}>${results.totalInterest}</span></ListGroup.Item>
+            </ListGroup>
+          </div>
         </Col>
       </Row>
     </Container>
