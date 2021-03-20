@@ -1,5 +1,6 @@
 {
   "name": "loan-calculator",
+  "homepage": "https://hanvnguyen94.github.io/loan-calculator",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
