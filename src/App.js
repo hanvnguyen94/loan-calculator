@@ -70,8 +70,8 @@ class App extends Component {
             <AuthenticatedRoute user={user} path='/change-pw' render={() => (
               <ChangePassword msgAlert={this.msgAlert} user={user} />
             )} />
-            <Route exact path='/' user={user} render={() => (
-              <Calculator msgAlert={this.msgAlert} user={user} />
+            <Route exact path='/' render={() => (
+              <Calculator />
             )} />
           </Container>
         </main>

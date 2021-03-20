@@ -116,7 +116,7 @@ const Calculator = () => {
 
   return (
     <Container>
-      <h1>Han's Loan Calculator</h1>
+      <h1>Loan Calculator</h1>
       <Row className='py-3 my-3 box-around'>
         <Col md={6}>
           <div className='flex-container1'>
@@ -247,7 +247,7 @@ const Calculator = () => {
         <Col md={6} className='results'>
           {/* displaying results card */}
           <div className='flex-container2'>
-            <Card.Title className='px-4'>Monthly Payments</Card.Title>
+            <Card.Title style={{ color: '#2d5939' }} className='px-4'>Monthly Payments</Card.Title>
             <Card.Title style={{ color: '#2d5939' }} className='px-4'>
               $ <span style={{ fontSize: '3rem' }}>{results.monthlyPayment}</span>
             </Card.Title>

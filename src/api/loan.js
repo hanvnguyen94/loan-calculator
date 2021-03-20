@@ -51,7 +51,7 @@ export const loanDelete = (id, user) => {
   })
 }
 
-export const calculatorUpdate = (id, loan, user) => {
+export const loanUpdate = (id, loan, user) => {
   return axios({
     url: apiUrl + `/loans/${id}`,
     method: 'PATCH',
