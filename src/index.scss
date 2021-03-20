@@ -6,7 +6,7 @@ body {
 }
 
 main {
-  min-height: 80vh;
+  min-height: 90vh;
 }
 
 h3 {
@@ -14,7 +14,7 @@ h3 {
 }
 
 h1{
-  color: #ffffffcb;
+  color: #ffffffcf;
   font-size: 1.8rem;
   padding-top: 1.5rem;
 }
@@ -56,8 +56,9 @@ h2{
 }
 
 .list-group-flush{
+  padding-top: 2rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
   
 }

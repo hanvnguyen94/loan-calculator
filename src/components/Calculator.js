@@ -250,12 +250,12 @@ const Calculator = () => {
             <div className='title'>
               <Card.Title style={{ fontSize: '2rem', color: '#e6e6e6' }} className='px-4'>Monthly Payments</Card.Title>
               <Card.Title style={{ color: '#e6e6e6' }} className='px-4'>
-                $ <span style={{ fontSize: '4rem' }}>{results.monthlyPayment}</span>
+                <span style={{ fontSize: '4rem' }}>${results.monthlyPayment}</span>
               </Card.Title>
             </div>
             <div className="list-group-flush">
-              <h4 style={{ color: '#e6e6e6' }}>Total Principal Paid <span style={{ fontWeight: 'bold' }}>${userInput.amount}</span></h4>
-              <h4 style={{ color: '#e6e6e6' }}>Total Interest Paid <span style={{ fontWeight: 'bold' }}>${results.totalInterest}</span></h4>
+              <h4 style={{ color: '#e6e6e6' }}>Total Principal Paid <span>${userInput.amount}</span></h4>
+              <h4 style={{ color: '#e6e6e6' }}>Total Interest Paid <span>${results.totalInterest}</span></h4>
             </div>
           </div>
         </Col>
