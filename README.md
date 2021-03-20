@@ -1,9 +1,9 @@
 ## Han's Loan Calculator
 
-A loan calculator engineered by React
+A loan calculator made with React. It will help you determine the monthly payments on a loan.
 
-## Important Links
-- [Deployed Site]("https://hanvnguyen94.github.io/loan-calculator")
+## Important Link
+- [Deployed Site]("https://hanvnguyen94.github.io/loan-calculator/#/")
 
 ## Features
 - Allows users to enter a loan amount, loan terms and interest to calculate the monthly payments.

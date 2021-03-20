@@ -116,7 +116,7 @@ const Calculator = () => {
 
   return (
     <Container>
-      <h1>Loan Calculator <i class="fas fa-home"></i></h1>
+      <h2>Loan Calculator <i class="fas fa-home"></i></h2>
       <Row className='py-3 my-3 box-around'>
         <Col className='input-field' md={6}>
           <div className='flex-container1'>
