@@ -1,4 +1,10 @@
 
+body {
+  background-color: #4fe782;
+  background-image: -webkit-linear-gradient(to bottom right, #4fe782 0%, #4fe782 60%, #c9feda 60%, #c9feda 60%);
+  background-image: linear-gradient(to bottom right, #4fe782 0%, #4fe782 60%, #c9feda 60%, #c9feda 60%);
+}
+
 main {
   min-height: 80vh;
 }
@@ -8,8 +14,9 @@ h3 {
 }
 
 h1{
+  color: #ffffffcb;
   font-size: 1.8rem;
-  padding: 1rem 0;
+  padding-top: 1.5rem;
 }
 
 h2{
@@ -17,20 +24,18 @@ h2{
   padding: 0.5rem 0;
 }
 
-.box-around {
-  border: 1px solid rgb(192, 254, 209);
-  box-shadow: 2px 2px 2px 1px rgba(192, 254, 209, 0.2);
-}
-
-
-// .flex-container1{
-//   display: flex;
-//   // flex-direction: column;
-//   justify-content: center;
-//   // align-items: center;
+// .box-around {
+//   border: 1px solid rgb(192, 254, 209);
+//   box-shadow: 2px 2px 2px 1px rgba(192, 254, 209, 0.2);
 // }
 
+.input-field {
+  background-color: #ffffff;
+  padding: 1rem 1rem;
+}
+
 .results {
+  background-color: #383838;
   color: #2d5939;
   border-left: 1px solid rgb(192, 254, 209);
 }
@@ -42,4 +47,17 @@ h2{
   align-items: center;
   padding: 2rem 0;
   margin: 2rem 0;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.list-group-flush{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  
 }

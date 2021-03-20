@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Container, Form, Button, Row, Col, Card, ListGroup } from 'react-bootstrap'
+import { Container, Form, Button, Row, Col, Card } from 'react-bootstrap'
 import { withRouter } from 'react-router-dom'
 
 
@@ -118,7 +118,7 @@ const Calculator = () => {
     <Container>
       <h1>Loan Calculator</h1>
       <Row className='py-3 my-3 box-around'>
-        <Col md={6}>
+        <Col className='input-field' md={6}>
           <div className='flex-container1'>
             {error ? (
               <div className="form-group has-danger">
@@ -247,14 +247,16 @@ const Calculator = () => {
         <Col md={6} className='results'>
           {/* displaying results card */}
           <div className='flex-container2'>
-            <Card.Title style={{ color: '#2d5939' }} className='px-4'>Monthly Payments</Card.Title>
-            <Card.Title style={{ color: '#2d5939' }} className='px-4'>
-              $ <span style={{ fontSize: '3rem' }}>{results.monthlyPayment}</span>
-            </Card.Title>
-            <ListGroup className="list-group-flush">
-              <ListGroup.Item>Total Principal Paid <span style={{ fontWeight: 'bold' }}>${userInput.amount}</span></ListGroup.Item>
-              <ListGroup.Item>Total Interest Paid <span style={{ fontWeight: 'bold' }}>${results.totalInterest}</span></ListGroup.Item>
-            </ListGroup>
+            <div className='title'>
+              <Card.Title style={{ fontSize: '2rem', color: '#e6e6e6' }} className='px-4'>Monthly Payments</Card.Title>
+              <Card.Title style={{ color: '#e6e6e6' }} className='px-4'>
+                $ <span style={{ fontSize: '4rem' }}>{results.monthlyPayment}</span>
+              </Card.Title>
+            </div>
+            <div className="list-group-flush">
+              <h4 style={{ color: '#e6e6e6' }}>Total Principal Paid <span style={{ fontWeight: 'bold' }}>${userInput.amount}</span></h4>
+              <h4 style={{ color: '#e6e6e6' }}>Total Interest Paid <span style={{ fontWeight: 'bold' }}>${results.totalInterest}</span></h4>
+            </div>
           </div>
         </Col>
       </Row>
