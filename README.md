@@ -3,7 +3,7 @@
 A loan calculator engineered by React
 
 ## Important Links
--
+- [Deployed Site]("https://hanvnguyen94.github.io/loan-calculator")
 
 ## Features
 - Allows users to enter a loan amount, loan terms and interest to calculate the monthly payments.

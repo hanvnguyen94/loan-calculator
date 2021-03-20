@@ -116,7 +116,7 @@ const Calculator = () => {
 
   return (
     <Container>
-      <h1>Loan Calculator</h1>
+      <h1>Loan Calculator <i class="fas fa-home"></i></h1>
       <Row className='py-3 my-3 box-around'>
         <Col className='input-field' md={6}>
           <div className='flex-container1'>
@@ -250,7 +250,7 @@ const Calculator = () => {
             <div className='title'>
               <Card.Title style={{ fontSize: '2rem', color: '#e6e6e6' }} className='px-4'>Monthly Payments</Card.Title>
               <Card.Title style={{ color: '#e6e6e6' }} className='px-4'>
-                <span style={{ fontSize: '4rem' }}>${results.monthlyPayment}</span>
+                <span style={{ fontSize: '3rem' }}>${results.monthlyPayment}</span>
               </Card.Title>
             </div>
             <div className="list-group-flush">
